@@ -1,0 +1,43 @@
+﻿@model Zoo_w57047.Entity.Zoo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="page-title">New location is here!</h1>
+<div style="text-align: end;">
+    <input class="btn btn-dark" type="button" value="Back to List" onclick="location.href='@Url.Action("Index", "Zoos")'" />
+</div>
+<hr />
+<div class="row-12">
+    <div class="col-6">
+        <img scr="~/assets/images/Zoo.png"/>
+    </div>
+    <div class="col-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adress" class="control-label"></label>
+                <input asp-for="Adress" class="form-control" />
+                <span asp-validation-for="Adress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketPrice" class="control-label"></label>
+                <input asp-for="TicketPrice" class="form-control" />
+                <span asp-validation-for="TicketPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

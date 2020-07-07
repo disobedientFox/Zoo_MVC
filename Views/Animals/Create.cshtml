@@ -1,0 +1,104 @@
+﻿@model Zoo_w57047.Models.NewAnimal
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="page-title">New resident's data</h1>
+
+<div style="text-align: end;">
+    <input class="btn btn-dark" type="button" value="Back to List" onclick="location.href='@Url.Action("Index", "Animals")'" />
+</div>
+
+<hr />
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row">
+    <form asp-action="Create" class="col-12" style="display:contents;">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label asp-for="Type" class="control-label"></label>
+                    <select asp-for="Type" class="form-control" asp-items="ViewBag.AnimalTypes"></select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <label asp-for="Country" class="control-label"></label>
+                    <input asp-for="Country" class="form-control" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label asp-for="DateOfBirth" class="control-label"></label>
+                    <input value="@DateTime.Now" type="date" asp-for="DateOfBirth" class="form-control" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <label asp-for="ArrivalDate" class="control-label"></label>
+                    <input value="@DateTime.Now" type="date" asp-for="ArrivalDate" class="form-control" />
+                    <span asp-validation-for="ArrivalDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" rows="5" class="form-control" style="max-height:150px; min-height:50px;"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Aviary" class="control-label"></label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+
+                            </th>
+                            <th>
+                                Condition
+                            </th>
+                            <th>
+                                Animals
+                            </th>
+                            <th>
+                                Type
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var aviary in Model.Aviaries)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="radio" asp-for="AviaryId" value="@aviary.Id" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => aviary.Condition)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => aviary.Animals.Count)/@Html.DisplayFor(x => aviary.MaxAnimals)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => aviary.Type)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

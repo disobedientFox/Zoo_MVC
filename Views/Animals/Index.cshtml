@@ -1,0 +1,92 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Animals";
+}
+
+<h1 class="page-title">Lovely animals</h1>
+
+<div style="text-align: end;">
+    <input class="btn btn-success" style="margin: 10px;" type="button" value="Do we have new residents?" onclick="location.href='@Url.Action("Create", "Animals")'" />
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                №
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.FirstOrDefault().Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.FirstOrDefault().DateOfBirth).
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.FirstOrDefault().Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.FirstOrDefault().ArrivalDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animals.FirstOrDefault().Description)
+            </th>
+            <th style="text-align:end">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 1;}
+        @foreach (var item in Model.Animals)
+        {
+            <tr>
+                <td>
+                    @i @{i++;}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td style="text-align:end">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-circle btn-edit"><i class="far fa-edit"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-circle btn-info"><i class="fas fa-info"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-circle btn-danger"><i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark">
+        <i class="fas fa-angle-left"></i>
+        Previous
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark">
+        Next
+        <i class="fas fa-angle-right"></i>
+    </a>
+}
