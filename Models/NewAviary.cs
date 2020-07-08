@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using Zoo_w57047.Entity;
 using Zoo_w57047.Enums;
 
-namespace Zoo_w57047.Entity
+namespace Zoo_w57047.Models
 {
-    public class Aviary
+    public class NewAviary
     {
         public long Id { get; set; }
         public AviaryCondition Condition { get; set; }
@@ -14,8 +17,8 @@ namespace Zoo_w57047.Entity
         [DisplayName("Capacity")]
         public int MaxAnimals { get; set; }
         public AviaryType Type { get; set; }
-        public virtual List<Animal> Animals { get; set; }
         public virtual Zoo Zoo { get; set; }
         public long ZooId { get; set; }
+        public List<Zoo> Zoos { get; set; }
     }
 }

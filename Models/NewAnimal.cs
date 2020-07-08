@@ -29,7 +29,5 @@ namespace Zoo_w57047.Models
         public Aviary Aviary { get; set; }
 
         public List<Aviary> Aviaries { get; set; }
-
-        public PageViewModel PageViewModel { get; set; }
     }
 }

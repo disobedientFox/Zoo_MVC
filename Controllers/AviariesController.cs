@@ -66,7 +66,15 @@ namespace Zoo_w57047.Controllers
                               select new { ID = (int)d, Name = d.ToString() };
             ViewData["AviaryType"] = new SelectList(aviaryTypes, "ID", "Name");
             ViewData["AviaryConditions"] = new SelectList(aviaryConditions, "ID", "Name");
-            return View();
+
+            var Zoos = _context.Zoos.Where(x => x.Id == x.Id).ToList();
+
+            NewAviary viewModel = new NewAviary
+            {
+                Zoos = Zoos
+            };
+
+            return View(viewModel);
         }
 
         // POST: Aviaries/Create
@@ -74,7 +82,7 @@ namespace Zoo_w57047.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Condition,MaxAnimals,Type")] Aviary aviary)
+        public async Task<IActionResult> Create([Bind("Id,Condition,MaxAnimals,Type,ZooId")] Aviary aviary)
         {
             if (ModelState.IsValid)
             {

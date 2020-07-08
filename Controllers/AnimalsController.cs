@@ -64,7 +64,7 @@ namespace Zoo_w57047.Controllers
                               select new { ID = (int)d, Name = d.ToString() };
             ViewData["animalTypes"] = new SelectList(animalTypes, "ID", "Name");
 
-            var AvailableAviaries = _context.Aviaries.Include(x => x.Animals).Where(x => x.MaxAnimals > x.Animals.Count).Take(7).ToList();
+            var AvailableAviaries = _context.Aviaries.Include(x => x.Animals).Where(x => x.MaxAnimals > x.Animals.Count).ToList();
 
             NewAnimal viewModel = new NewAnimal
             {

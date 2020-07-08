@@ -1,4 +1,4 @@
-﻿@model Zoo_w57047.Entity.Aviary
+﻿@model Zoo_w57047.Models.NewAviary
 
 @{
     ViewData["Title"] = "Create";
@@ -10,31 +10,72 @@
 </div>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Condition" class="control-label"></label>
-                <select asp-for="Condition" class="form-control" asp-items="ViewBag.AviaryConditions"></select>
-                <span asp-validation-for="Condition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxAnimals" class="control-label"></label>
-                <input asp-for="MaxAnimals" class="form-control" />
-                <span asp-validation-for="MaxAnimals" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <select asp-for="Type" class="form-control" asp-items="ViewBag.AviaryType"></select>
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success" />
-            </div>
-        </form>
+
+<form asp-action="Create" class="row-12" style="display:flex;">
+    <div class="col-5">
+        <img src="~/assets/images/Cage.png" style="max-width: 100%;" />
     </div>
-</div>
+    <div class="col-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Condition" class="control-label"></label>
+            <select asp-for="Condition" class="form-control" asp-items="ViewBag.AviaryConditions"></select>
+            <span asp-validation-for="Condition" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MaxAnimals" class="control-label"></label>
+            <input asp-for="MaxAnimals" class="form-control" />
+            <span asp-validation-for="MaxAnimals" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Type" class="control-label"></label>
+            <select asp-for="Type" class="form-control" asp-items="ViewBag.AviaryType"></select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="scrollbar" id="style-1">
+            <div class="force-overflow">
+                <div class="form-group">
+                    <label asp-for="Zoo" class="control-label"></label>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Address
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var zoo in Model.Zoos)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="radio" asp-for="ZooId" value="@zoo.Id" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => zoo.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => zoo.Adress)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

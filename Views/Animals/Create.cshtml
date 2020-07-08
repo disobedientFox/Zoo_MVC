@@ -53,47 +53,49 @@
                 <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
-        <div class="col-6">
-            <div class="form-group">
-                <label asp-for="Aviary" class="control-label"></label>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-
-                            </th>
-                            <th>
-                                Condition
-                            </th>
-                            <th>
-                                Animals
-                            </th>
-                            <th>
-                                Type
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var aviary in Model.Aviaries)
-                        {
+        <div class="scrollbar col-6" id="style-1" style="height:450px;">
+            <div class="force-overflow">
+                <div class="form-group">
+                    <label asp-for="Aviary" class="control-label"></label>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>
-                                    <input type="radio" asp-for="AviaryId" value="@aviary.Id" />
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(x => aviary.Condition)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(x => aviary.Animals.Count)/@Html.DisplayFor(x => aviary.MaxAnimals)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(x => aviary.Type)
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                <th>
 
+                                </th>
+                                <th>
+                                    Condition
+                                </th>
+                                <th>
+                                    Animals
+                                </th>
+                                <th>
+                                    Type
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var aviary in Model.Aviaries)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="radio" asp-for="AviaryId" value="@aviary.Id" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => aviary.Condition)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => aviary.Animals.Count)/@Html.DisplayFor(x => aviary.MaxAnimals)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => aviary.Type)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
     </form>
